@@ -1,0 +1,21 @@
+apiVersion: apps/v1           # 쿠버네티스 api 버전
+kind: Deployment              # 생성할 오브젝트 종류
+metadata:                
+  name: nginx-deployment      # deployment의 이름
+  labels:
+    app: nginx                # label 지정
+spec:                         # deployment의 스펙을 정의
+  replicas: 3                 # 3개의 pod 설정
+  selector:                   # deployment가 관리할 pod를 찾는 방법을 정의
+    matchLabels:     
+      app: nginx
+  template:
+    metadata:
+      labels:                 # pod의 label
+        app: nginx
+    spec:
+      containers:             # 컨테이너 설정
+      - name: nginx          
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
